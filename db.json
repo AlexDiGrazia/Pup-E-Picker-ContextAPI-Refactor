@@ -1,20 +1,6 @@
 {
   "dogs": [
     {
-      "name": "Vanessa",
-      "image": "../public/assets/blue-heeler.png",
-      "description": "South male shrug before breastplate aggregate Jamaican",
-      "isFavorite": false,
-      "id": 2
-    },
-    {
-      "name": "Evie",
-      "image": "../public/assets/blue-heeler.png",
-      "description": "female Emirates Representative risk Computer change Frozen",
-      "isFavorite": false,
-      "id": 4
-    },
-    {
       "name": "Lyda",
       "image": "../public/assets/corgi.png",
       "description": "system violet graph hacking Electric Rowe software",
@@ -36,13 +22,6 @@
       "id": 17
     },
     {
-      "name": "Olaf",
-      "image": "../public/assets/corgi.png",
-      "description": "sed Buckinghamshire numismatist Soft HTTP Volkswagen Chips PCI",
-      "isFavorite": false,
-      "id": 18
-    },
-    {
       "name": "Leon",
       "image": "../public/assets/corgi.png",
       "description": "deploy Account connect calculate yum calculating Outdoors",
@@ -53,7 +32,7 @@
       "name": "Cherry",
       "image": "/public/assets/chihuahua.avif",
       "description": "The ChiWowWow",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 20
     },
     {
@@ -76,6 +55,20 @@
       "description": "Rawr!",
       "isFavorite": false,
       "id": 23
+    },
+    {
+      "name": "Reptaur",
+      "image": "/public/assets/corgi.png",
+      "description": "Big green dinosaur doggie",
+      "isFavorite": true,
+      "id": 24
+    },
+    {
+      "name": "Rubber Ducky",
+      "image": "/public/assets/cowardly.png",
+      "description": "Not actually a doggo, but a good debugging pal!",
+      "isFavorite": false,
+      "id": 25
     }
   ]
 }

@@ -22,11 +22,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchData = () => Requests.getAllDogs().then(setAllDogs);
 
-  const loadingStateHandler = (apiCall: Promise<Dog>): Promise<void> => {
-    setIsLoading(true);
-    return apiCall.then(() => fetchData()).finally(() => setIsLoading(false));
-  };
-
   const toggleDisplay = (collection: Displays) => {
     const newDisplay = display === collection ? "allDogs" : collection;
     setDisplay(newDisplay);
@@ -44,8 +39,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       .catch((error: Error) => error);
   };
 
-  const createDog = (newDog: Omit<Dog, "id">) =>
-    loadingStateHandler(Requests.postDog(newDog));
+  const createDog = (newDog: Omit<Dog, "id">) => {
+    setIsLoading(true);
+    return Requests.postDog(newDog)
+      .then(() => fetchData())
+      .finally(() => setIsLoading(false));
+  };
 
   const deleteDog = (dog: Dog, dogId: number) => {
     setAllDogs(allDogs.filter((dog) => dog.id !== dogId));
