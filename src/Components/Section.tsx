@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import { SectionButton } from "./SectionButton";
+import { AppContext } from "../Providers/AppProvider";
 
 export const Section = ({
   label,
@@ -8,38 +10,27 @@ export const Section = ({
   label: string;
   children: ReactNode;
 }) => {
+  const { display, toggleDisplay, total } = useContext(AppContext);
   return (
     <section id="main-section">
       <div className="container-header">
         <div className="container-label">{label}</div>
         <div className="selectors">
-          {/* This should display the favorited count */}
-          <div
-            className={`selector ${"active"}`}
-            onClick={() => {
-              alert("click favorited");
-            }}
-          >
-            favorited ( {0} )
-          </div>
-
-          {/* This should display the unfavorited count */}
-          <div
-            className={`selector ${""}`}
-            onClick={() => {
-              alert("click unfavorited");
-            }}
-          >
-            unfavorited ( {10} )
-          </div>
-          <div
-            className={`selector ${""}`}
-            onClick={() => {
-              alert("clicked create dog");
-            }}
-          >
-            create dog
-          </div>
+          <SectionButton
+            isActive={display === "favorited"}
+            onClick={() => toggleDisplay("favorited")}
+            label={`favorited ( ${total.favorites} )`}
+          />
+          <SectionButton
+            isActive={display === "unFavorited"}
+            onClick={() => toggleDisplay("unFavorited")}
+            label={`unfavorited ( ${total.unFavorites} )`}
+          />
+          <SectionButton
+            isActive={display === "createDog"}
+            onClick={() => toggleDisplay("createDog")}
+            label={"create dog"}
+          />
         </div>
       </div>
       <div className="content-container">{children}</div>
