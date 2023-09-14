@@ -1,39 +1,11 @@
 {
   "dogs": [
     {
-      "name": "Lyda",
-      "image": "../public/assets/corgi.png",
-      "description": "system violet graph hacking Electric Rowe software",
-      "isFavorite": false,
-      "id": 8
-    },
-    {
-      "name": "Ayden",
-      "image": "../public/assets/corgi.png",
-      "description": "West Optimization West Bronze compelling Product program JSON",
-      "isFavorite": true,
-      "id": 14
-    },
-    {
       "name": "Van",
       "image": "../public/assets/corgi.png",
       "description": "Electric CLI Division cyan purple",
-      "isFavorite": true,
-      "id": 17
-    },
-    {
-      "name": "Leon",
-      "image": "../public/assets/corgi.png",
-      "description": "deploy Account connect calculate yum calculating Outdoors",
-      "isFavorite": true,
-      "id": 19
-    },
-    {
-      "name": "Cherry",
-      "image": "/public/assets/chihuahua.avif",
-      "description": "The ChiWowWow",
       "isFavorite": false,
-      "id": 20
+      "id": 17
     },
     {
       "name": "doggo",
@@ -46,7 +18,7 @@
       "name": "Carry",
       "image": "/public/assets/blue-heeler.png",
       "description": "The canary",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 22
     },
     {

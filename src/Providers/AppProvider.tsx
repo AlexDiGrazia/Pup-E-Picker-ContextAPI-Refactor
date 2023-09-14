@@ -1,12 +1,12 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { Displays, Dog } from "../types";
+import { ActiveTab, Dog } from "../types";
 import { Requests } from "../api";
 
 type TAppContext = {
-  display: Displays;
+  display: ActiveTab;
   isLoading: boolean;
-  toggleDisplay: (collection: Displays) => void;
-  toggleFavoriteStatus: (dog: Dog, dogId: number) => void;
+  toggleDisplay: (collection: ActiveTab) => void;
+  toggleFavoriteStatus: (dog: Pick<Dog, "isFavorite">, dogId: number) => void;
   createDog: (newDog: Omit<Dog, "id">) => Promise<void>;
   deleteDog: (dog: Dog, dogId: number) => void;
   collection: Dog[];
@@ -16,27 +16,33 @@ type TAppContext = {
 export const AppContext = createContext<TAppContext>({} as TAppContext);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [display, setDisplay] = useState<Displays>("allDogs");
+  const [display, setDisplay] = useState<ActiveTab>("allDogs");
   const [allDogs, setAllDogs] = useState<Dog[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchData = () => Requests.getAllDogs().then(setAllDogs);
 
-  const toggleDisplay = (collection: Displays) => {
+  const toggleDisplay = (collection: ActiveTab) => {
     const newDisplay = display === collection ? "allDogs" : collection;
     setDisplay(newDisplay);
   };
 
-  const toggleFavoriteStatus = (dog: Dog, dogId: number) => {
+  const toggleFavoriteStatus = (
+    dog: Pick<Dog, "isFavorite">,
+    dogId: number
+  ) => {
     const newStatus = dog.isFavorite === false ? true : false;
     setAllDogs(
       allDogs.map((dog) =>
         dog.id === dogId ? { ...dog, isFavorite: newStatus } : dog
       )
     );
-    Requests.updateDog(dog.id, { isFavorite: newStatus })
-      .then((response) => (!response.ok ? setAllDogs(allDogs) : null))
-      .catch((error: Error) => error);
+    Requests.updateDog(dogId, { isFavorite: newStatus }).catch(
+      (error: Error) => {
+        setAllDogs(allDogs);
+        return error;
+      }
+    );
   };
 
   const createDog = (newDog: Omit<Dog, "id">) => {
@@ -48,9 +54,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const deleteDog = (dog: Dog, dogId: number) => {
     setAllDogs(allDogs.filter((dog) => dog.id !== dogId));
-    Requests.deleteDog(dog.id)
-      .then((response) => (!response.ok ? setAllDogs(allDogs) : null))
-      .catch((error: Error) => error);
+    Requests.deleteDog(dog.id).catch((error: Error) => {
+      setAllDogs(allDogs);
+      return error;
+    });
   };
 
   useEffect(() => {
